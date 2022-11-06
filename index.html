@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .up {
+            color: green;
+        }
+        
+        .down {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>App chat and seen bitcoin</h1>
+    <ul id="messages"></ul>
+    <form action="" id="chat-form">
+        <input type="text" id="chat-mes" />
+        <button type="submit" id="send-chat">Gửi</button>
+    </form>
+    <span id="span-price"></span>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const chatForm = document.querySelector("#chat-form");
+    const chatMes = document.querySelector('#chat-mes');
+    const name = prompt("Ban ten la gi?")
+    chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const message = chatMes.value;
+        socket.emit('on-chat', {
+            name: name,
+            message: message
+        });
+
+        chatMes.value = '';
+    });
+
+    const messages = document.querySelector("#messages");
+
+    socket.on('user-chat', (data) => {
+        // const chatItem = document.createComment('li');
+        // chatItem.textContent = `${data.name}: ${data.message}`;
+        // messages.appendChild(chatItem);
+        messages.innerHTML += `<li>${data.name}: ${data.message}</li>`;
+    });
+    const spanPrice = document.querySelector("#span-price");
+    let lastPrice = 0;
+    socket.on("bitcoin-price", (data) => {
+        let price = data.price;
+        if (lastPrice > price) {
+            spanPrice.className = 'up';
+        } else {
+            spanPrice.className = 'down';
+        }
+        lastPrice = price;
+        spanPrice.textContent = `${data.price} USD`;
+    })
+</script>
+
+</html>
