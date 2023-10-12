@@ -12,6 +12,9 @@ COPY . .
 
 RUN yarn
 
+# # Bundle app source
 ENV USE_CACHE=true
+
+EXPOSE 8080
 
 CMD ["yarn", "start"]
