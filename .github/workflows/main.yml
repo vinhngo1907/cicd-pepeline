@@ -29,3 +29,17 @@ jobs:
       
       - name: Push Docker image
         run: docker push vinhngo1999/v-nodeapp
+
+      - name: Merge into master branch
+        run: |
+          git checkout master
+          git pull origin master
+          git merge --no-ff --no-edit main
+          git push origin master
+
+      - name: Merge into dev branch
+        run: |
+          git checkout dev
+          git pull origin dev
+          git merge --no-ff --no-edit main
+          git push origin dev
