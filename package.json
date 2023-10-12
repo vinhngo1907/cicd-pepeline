@@ -1,28 +1,24 @@
 {
-    "name": "sample",
+    "name": "v-node-app",
     "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
+    "description": "NodeApp for CICD test",
+    "main": "index.js",
+    "private": true,
     "scripts": {
-        "dev": "nodemon src/app.js",
-        "start": "node src/app.js"
+        "test": "./node_modules/.bin/mocha ./test/test.js",
+        "start": "node index.js",
+        "dev": "nodemon index.js"
     },
     "author": "Vinh Ngo <vinhtrungngo1907@gmail.com>",
     "license": "ISC",
     "dependencies": {
-        "@koa/router": "^10.1.1",
-        "dotenv": "^16.0.3",
-        "jp-conversion": "0.0.7",
-        "koa": "^2.13.4",
-        "koa-logger": "^3.2.1",
-        "koa2-cors": "^2.0.6",
-        "lodash": "^4.14.1",
-        "redis": "^2.6.2",
-        "request": "^2.74.0",
-        "swagger2": "^3.0.0",
-        "swagger2-koa": "^3.0.0"
+        "delay": "^5.0.0",
+        "express": "4.17.1",
+        "socket.io": "^4.7.2"
     },
     "devDependencies": {
-        "nodemon": "^2.0.12"
+        "mocha": "9.1.1",
+        "nodemon": "^3.0.1",
+        "supertest": "6.1.6"
     }
 }

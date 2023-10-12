@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v-nodeapp-deployment
+  labels:
+    app: v-nodeapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: v-nodeapp
+  template:
+    metadata:
+      labels:
+        app: v-nodeapp
+    spec:
+      containers:
+      - name: nodeserver
+        image: vinhngo1999/v-nodeapp:latest
+        ports:
+        - containerPort: 3000

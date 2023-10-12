@@ -4,8 +4,16 @@ const http = require("http").createServer(app);
 const delay = require("delay");
 const io = require("socket.io")(http);
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/will", function (req, res) {
+    res.send('{"response": "Hello World"}');
+});
+
+app.get("/ready", function (req, res) {
+    res.send('{"response": "Great! App works!"}');
 });
 
 io.on("connection", (socket) => {
@@ -17,7 +25,7 @@ io.on("connection", (socket) => {
 });
 
 const port = 3000;
-http.listen(port, function() {
+http.listen(port, function () {
     console.log("Server started on port " + port);
 });
 
@@ -32,3 +40,5 @@ async function broadcastBitcoinPrice() {
 }
 
 broadcastBitcoinPrice();
+
+module.exports = app;
