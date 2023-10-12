@@ -1,15 +1,10 @@
 "use strict";
 // Get image from xkcn.info
-const request = require("request");
-const converter = require("jp-conversion");
-const _ = require('lodash');
+const request = require("supertest");
+const app = require("../index.js");
 
-class Api{
-    constructor(){
-        this._apiId = 'UrwskPfkqQ0DuVry2gYL';
-        this._affiliateId = "10278-996";
-
-        this._url = `https://api.dmm.com/affiliate/v3/`;
-        this._cache = {};
-    }
-}
+describe('GET /will', function () {
+    it('respond with hello world', function (done) {
+        request(app).get('/will').expect('{"response": "Hello World"}', done)
+    });
+});

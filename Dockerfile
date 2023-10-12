@@ -10,11 +10,8 @@ COPY package*.json ./
 
 COPY . .
 
-RUN yarn
-
-# # Bundle app source
-ENV USE_CACHE=true
+RUN npm install
 
 EXPOSE 8080
 
-CMD ["yarn", "start"]
+CMD ["node", "index.js"]
